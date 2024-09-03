@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Demoing Accessibility</title>
+    <title>Demoing accessibility</title>
 </head>
 
 <body>
     <h1>
-        Accessibility Demo
+        Accessibility demo
     </h1>
     <ul>
         <li>
@@ -30,32 +30,25 @@
         </li>
     </ul>
     <hr>
-    <h2 id="information">Your Information</h2>
+    <h2 id="information">Your information</h2>
     <form>
-        <!-- Labels added for accessibility -->
-        <label for="name">Name:</label>
-        <input id="name" name="name" autocomplete="off">
-
-        <label for="homePage">Home Page:</label>
-        <input id="homePage" name="homePage" autocomplete="off">
-
-        <label for="email">Email:</label>
-        <input id="email" name="email" type="email" autocomplete="off">
-
-        <label for="password">Password:</label>
-        <input id="password" name="password" type="password" autocomplete="off">
-
-        <label for="favoriteCity">Favorite City:</label>
-        <select id="favoriteCity" name="favoriteCity">
+        <p>Name:</p>
+        <input id="name" autocomplete="off">
+        <p>homePage:</p>
+        <input id="homePage" autocomplete="off">
+        <p>Email:</p>
+        <input id="email" autocomplete="off">
+        <p>Password:</p>
+        <input id="password" autocomplete="off">
+        <p>Favorite city</p>
+        <select id="favoriteCity" name="select">
             <option value="1">Amsterdam</option>
             <option value="2">London</option>
             <option value="3">Moscow</option>
             <option value="4">Los Angeles</option>
             <option value="5">New York</option>
         </select>
-
-        <!-- Alt text added for accessibility -->
-        <img src="submit.png" alt="Submit button" style="display:block; width: 200px; height: 200px;">
+        <img src="submit.png" style="display:block; width: 200px; height: 200px;">
     </form>
 
 </body>
