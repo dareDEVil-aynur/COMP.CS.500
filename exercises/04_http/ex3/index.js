@@ -1,13 +1,13 @@
 const http = require('http');
 
 http.createServer(function(request, response) {
-    response.writeHead(200, { 'Content-Type': 'text/html' });
+    response.writeHead(200, { 'Content-Type': 'application/json' });
     
     const headers = request.headers;
 
-    const headersString = JSON.stringify(headers, null, 2);
+    const headersString = JSON.stringify(headers);
 
-    response.write('<html><body><pre>' + headersString + '</pre></body></html>');
+    response.write(headersString);
 
     response.end();
 }).listen(3000, () => {
