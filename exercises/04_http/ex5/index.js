@@ -4,11 +4,28 @@ const path = require('path');
 
 http.createServer(function (request, response) {
 
-  //TODO: implement sending responds to requests for HTML, CSS, ZIP, XML, TXT, JSON, and */* handling JSON provided as an example.
-  if (request.headers['accept'].includes('application/json')) {
+  const accHeader= request.headers['accept'];
+  
+  //TODO: implement sending responds to requests for XML, TXT, JSON, and */* handling JSON provided as an example.
+  if ( (request.headers['accept'].includes('application/json')) || (request.headers['accept'].includes('*/*'))) {
     // You can use the readFileSendResponse(fileName, contentType, response) function 
     // to read a file and send the response or write your own. It's up to you. :-)
-  } else {
+    readFileSendResponse('data.json' , 'application/json', response);
+  }
+  else if (request.headers['accept'].includes('application/xml')) {
+    // You can use the readFileSendResponse(fileName, contentType, response) function 
+    // to read a file and send the response or write your own. It's up to you. :-)
+    readFileSendResponse('data.xml' , 'application/xml', response);
+  }
+
+  else if (request.headers['accept'].includes('text/plain')) {
+    // You can use the readFileSendResponse(fileName, contentType, response) function 
+    // to read a file and send the response or write your own. It's up to you. :-)
+    readFileSendResponse('data.txt' , 'text/plain', response);
+  }
+
+
+  else {
     response.statusCode = 406;
     response.statusMessage = 'Content type not available';
     response.end();
