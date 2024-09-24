@@ -11,12 +11,14 @@ function setCookies() {
 
 // TODO: Implement the getCookie function. It should take a cookie name as an argument and return the cookie value.
 function getCookie(name) {
+  const cookies = document.cookie.split('; ');
   for (let cookie of cookies) {
     const [key, value] = cookie.split('=');
     if (key === name) {
       return value;
     }
   }
+  return ''; 
 }
 
 // DO NOT MODIFY BELOW THIS LINE
