@@ -1,12 +1,13 @@
 // TODO: Copy the setCookies function from the previous exercise
 function setCookies() {
-  const text1 = Document.getElementById('text1');
-  const text2 = Document.getElementById('text2');
-  const checkbox = Document.getElementById('checkbox');
+  const text1 = document.getElementById('text1').value;
+  const text2 = document.getElementById('text2').value;
+  const checkbox = document.getElementById('checkbox').checked;
 
-  document.cookie = `text1=${text1}`;
-  document.cookie = `text2=${text2}`;
-  document.checkbox = `checkbox=${checkbox}`;
+  // Set cookies with proper encoding
+  document.cookie = `text1=${encodeURIComponent(text1)}; path=/`;
+  document.cookie = `text2=${encodeURIComponent(text2)}; path=/`;
+  document.cookie = `checkbox=${checkbox}; path=/`;
 }
 
 // TODO: Implement the getCookie function. It should take a cookie name as an argument and return the cookie value.
@@ -15,10 +16,10 @@ function getCookie(name) {
   for (let cookie of cookies) {
     const [key, value] = cookie.split('=');
     if (key === name) {
-      return value;
+      return decodeURIComponent(value);
     }
   }
-  return ''; 
+  return '';
 }
 
 // DO NOT MODIFY BELOW THIS LINE
