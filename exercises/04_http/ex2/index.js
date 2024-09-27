@@ -8,7 +8,7 @@ http.createServer(function(request, response) {
       response.writeHead(404);
       response.write('An error occured: ', error);
     } else {
-      response.writeHead(200, { 'Content-Type': 'FILE_TYPE_HERE' });
+      response.writeHead(202, { 'Content-Type': 'FILE_TYPE_HERE' });
       response.write(htmlPage);
     }
     response.end();
