@@ -13,7 +13,50 @@
  * It draws only one arrow, the f expression must be 'drawArrow'
  * @param {*} i the index, the nth arrow to be drawn, note that the sequence has to return from destination back to the source
  */
-const drawArrows = (actors, timeout, drawArrow, i = 0) => {}
+const drawArrows = (actors, timeout, drawArrow, i = 0, callback) => {
+  const len = actors.length - 1;
+
+  const forward = () => {
+    if (i <= len) {
+      drawArrow(i, timeout, len);
+
+      setTimeout(() => {
+        i++;
+        forward();
+      }, timeout);
+    } else if (callback) {
+      callback();
+    }
+  };
+
+  const backward = () => {
+    if (i >= 0) {
+      drawArrow(i, timeout, len);
+
+      setTimeout(() => {
+        i--;
+        backward();
+      }, timeout);
+    }
+  };
+
+  forward();
+
+  setTimeout(() => {
+    i = len;
+    backward();
+  }, (len + 1) * timeout);
+};
+
+
+
+
+
+
+
+
+
+
 
 
 
