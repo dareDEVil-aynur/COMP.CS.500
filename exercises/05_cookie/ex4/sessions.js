@@ -44,6 +44,7 @@ const server = http.createServer((req, res) => {
 
   const session = sessions[sessionId]; // Get the session data
 
+<<<<<<< HEAD
   // DO NOT MODIFY BELOW THIS LINE
   const parsedUrl = url.parse(req.url, true);
   if (
@@ -56,6 +57,18 @@ const server = http.createServer((req, res) => {
   } else {
     res.end(`Session Data: ${JSON.stringify(session)}`);
   }
+=======
+    const session = sessions[sessionId]; 
+    
+    // DO NOT MODIFY BELOW THIS LINE
+    const parsedUrl = url.parse(req.url, true);
+    if (parsedUrl.pathname === '/set' && parsedUrl.query.key && parsedUrl.query.value) {
+        session[parsedUrl.query.key] = parsedUrl.query.value;
+        res.end(`Session Updated: ${JSON.stringify(session)}`);
+    } else {
+        res.end(`Session Data: ${JSON.stringify(session)}`);
+    }
+>>>>>>> 5d857315e7daf2de8270402672b7b9af9932ee5f
 });
 
 // Conditionally start the server if this script is run directly
