@@ -7,9 +7,15 @@
  * be 'Parameter is not a number!'
  * @returns a new Promise, which resolves to the parameter value
  */
-const f = (value) => {
-  throw "Not yet implemented!";
-}
+const f = async (value) => {
+  return new Promise((resolve, reject) => {
+    if (typeof value !== 'number' || isNaN(value)) {
+      reject('Parameter is not a number!');
+    } else {
+      resolve(value);
+    }
+  });
+};
 
 /**
  * TODO: Implement an async function 'g' that calls the previously made async function 'f'.
@@ -17,9 +23,11 @@ const f = (value) => {
  * Handle exceptions gracefully by returning the thrown error message with catch().
  * @param {number} value
  */
-const g = (value) => {
-  throw "Not yet implemented!";
-}
+const g = async (value) => {
+  return f(value)
+    .then((result) => Math.log(result))
+    .catch((Error) => error.message);
+};
 
 /**
  * TODO: Implement an async function 'checkIfFunction'.
@@ -27,12 +35,18 @@ const g = (value) => {
  * However, since we are now practicing
  * Promises, the value is returned as a "promisified" value
  * @param {*} param the value is checked to be a function
- * @returns resolved Promise with value true if parameter is a function or 
+ * @returns resolved Promise with value true if parameter is a function or
  * a rejected Promise with message "Not a function!" otherwise
  */
 const checkIfFunction = (param) => {
-  throw "Not yet implemented!";
-}
+  return new Promise((resolve, reject) => {
+    if (typeof param === 'function') {
+      resolve(true);
+    } else {
+      reject('Not a function!');
+    }
+  });
+};
 
 /**
  * TODO: Implement a function 'p' that returns a resolved Promise after a given time.
@@ -42,7 +56,17 @@ const checkIfFunction = (param) => {
  * @returns {an empty Promise after a given time}, if time is acceptable
  */
 const p = (time) => {
-  throw "Not yet implemented!";
+  return new Promise((resolve, reject) => {
+    if (time > 2000) {
+      reject('Too long time!');
+    } else if (typeof time !== 'number') {
+      reject('Not a number!');
+    } else {
+      setTimeout(() => {
+        resolve();
+      }, time);
+    }
+  });
 };
 
 //TODO: verify that all functions exported below are available for tests (they should be)
@@ -50,6 +74,5 @@ exports.f = f;
 exports.g = g;
 exports.checkIfFunction = checkIfFunction;
 exports.p = p;
-
 
 // TODO: Run the tests with npm test
