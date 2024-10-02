@@ -11,8 +11,19 @@
  * @param {*} i the index of the arrow
  */
 function drawArrows(actors, timeout, drawArrow, i = 0) {
-
-};
+    const len = actors.length;
+  
+    // Create an async IIFE (Immediately Invoked Function Expression)
+    
+  
+  (async function () {
+    for (i; i < len * 2 - 1; i++) { // Corrected termination condition
+      drawArrow(i, timeout, len);
+      await new Promise(resolve => setTimeout(resolve, timeout));
+    }
+    
+  })();
+}
 
 
 
