@@ -14,8 +14,9 @@ const server = http.createServer((request, response) => {
 
   const queryObject = url.parse(request.url, true).query;
 
-  // TODO: sanitize the the 'addThisText' query parameter user input so that injected scripts won't run
-  // addThisText from the query parameters is accessed with queryObject['addThisText']. It should be sanitized with encodeURIComponent().
+  // Sanitize the 'addThisText' query parameter using encodeURIComponent()
+  const sanitizedText = encodeURIComponent(queryObject['addThisText'] || '');
+
   response.write(
     `   <!doctype html>
             <html lang="en">
@@ -25,10 +26,11 @@ const server = http.createServer((request, response) => {
             </head>
             <body>
                 <p id="xss">Here be XSS!  queryObject['addThisText'] is now: </p>
-                ${queryObject['addThisText']}
+                ${sanitizedText}
             </body >
             </html >
-    `);
+    `
+  );
   console.log("queryObject['addThisText']: ", queryObject['addThisText']);
   response.end();
 });
