@@ -19,7 +19,7 @@ const server = http.createServer((request, response) => {
       } else {
         response.writeHead(200, {
           'Content-Security-Policy':
-            ' img-src www.flickr.com *.www.flickr.com staticflickr.com *.staticflickr.com ; script-src "self" localhost',
+            'img-src www.flickr.com *.www.flickr.com *.staticflickr.com *.creativeflickr.com; script-src "self" localhost',
         });
         response.write(file);
       }
