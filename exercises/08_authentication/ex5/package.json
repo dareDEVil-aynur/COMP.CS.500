@@ -4,16 +4,19 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "Badly formatted project, please fix me",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "lint": "^0.8.19"
   },
   "devDependencies": {
+    "eslint": "^9.13.0",
     "globals": "^15.10.0",
     "mocha": "^10.7.3",
     "mocha-eslint": "^7.0.0"
