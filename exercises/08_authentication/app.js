@@ -42,6 +42,15 @@ function usersOnly(req, res, next) {
   return res.redirect('/login');
 }
 
+// Middleware function to allow only admins
+function adminOnly(req, res, next) {
+  if (req.session.user && req.session.user.role === 'admin') {
+    return next(); // User is an admin, proceed with the request
+  }
+  // User is not an admin, redirect to /events
+  return res.redirect('/events');
+}
+
 app.get('/', usersOnly, (req, res) => {
   return res.redirect('/events');
 });
@@ -153,19 +162,18 @@ app.post('/events/:id', usersOnly, (req, res) => {
   return res.redirect('/events');
 });
 
-//TODO: This should only be available to signed in users with the role of admin
-app.post('/events/:id/delete', usersOnly, (req, res) => {
+// This route should only be accessible to admins
+app.post('/events/:id/delete', usersOnly, adminOnly, (req, res) => {
   const index = events.findIndex((e) => e._id === req.params.id);
 
   if (index !== -1) {
     events.splice(index, 1);
   } else {
-    //this is odd, someone attempted to remove an item that does not exists...
-    //this could be a serious bug or an attempt at malicious activity
+    // this is odd, someone attempted to remove an item that does not exists...
+    // this could be a serious bug or an attempt at malicious activity
   }
 
-  //POST-redirect-GET
-  //(otherwise, client refreshing their browser window would send another unsafe request!)
+  // POST-redirect-GET
   return res.redirect('/events');
 });
 
