@@ -40,14 +40,17 @@ router.get('/', (req, res) => {
   res.send(usersList);
 });
 
+// Example of fixing no-shadow warning in ./src/routes/users.js
 router.get('/:id', (req, res) => {
-  const userId = parseInt(req.params.id, 10); // Parse the ID to an integer
-  const user = usersList.find((user) => user.id === userId);
-  if (user) {
-    res.send(user);
+  const userId = parseInt(req.params.id, 10);
+  const foundUser = usersList.find((user) => user.id === userId); // Use a different name, e.g., foundUser
+
+  if (foundUser) {
+    res.send(foundUser);
   } else {
     res.status(404).send({ error: 'User not found' });
   }
 });
+
 
 module.exports = router;
