@@ -1,4 +1,4 @@
-const mongoose = require('./../mongoose');
+const mongoose = require('../config/mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 let mongoServer;
@@ -6,12 +6,8 @@ let mongoServer;
 before(async () => {
     mongoServer = await MongoMemoryServer.create();
     const uri = mongoServer.getUri();
-    await mongoose.connect(uri);
-});
 
-after(async () => {
-    await mongoose.disconnect();
-    await mongoServer.stop();
+    await mongoose.connect(uri);
 });
 
 beforeEach(async () => {
@@ -19,4 +15,9 @@ beforeEach(async () => {
     for(const key in collections) {
         await collections[key].deleteMany({});
     }
+});
+
+after(async() => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
 });
